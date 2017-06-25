@@ -1,6 +1,6 @@
 #utf8
 
-import urllib2
+import urllib.request as ur
 
 class HtmlDownloader(object):
 	
@@ -8,7 +8,7 @@ class HtmlDownloader(object):
 		if url is None:
 			return None
 
-		response = urllib2.urlopen(url)
+		response = ur.urlopen(url)
 
 		if response.getcode() != 200:
 			return None

@@ -1,6 +1,9 @@
 #utf8
 
-from med_crawler import url_manager, html_downloader, html_parser, html_outputer
+import url_manager
+import html_downloader
+import html_parser
+import html_outputer
 
 class SpiderMain(object):
 	def __init__(self):
@@ -15,6 +18,7 @@ class SpiderMain(object):
 		while self.urls.has_new_url():
 			try:
 				new_url = self.urls.get_new_url()
+				# print(new_url)
 				print(count)
 				html_cont = self.downloader.download(new_url)
 				new_urls, new_data = self.parser.parse(new_url, html_cont)
@@ -22,7 +26,7 @@ class SpiderMain(object):
 				self.outputer.collect_data(new_data)
 				count += 1
 
-				if count == 100:
+				if count == 500:
 					break
 
 			except:
@@ -31,7 +35,7 @@ class SpiderMain(object):
 		self.outputer.output_html()
 
 
-if __name == 'main':
-	root_url = 'http://med.emory.edu/about/faculty_directory.html'
+if __name__ == '__main__':
+	root_url = 'http://www.anesthesiology.emory.edu/faculty/index.html'
 	obj_spider = SpiderMain()
 	obj_spider.craw(root_url)
